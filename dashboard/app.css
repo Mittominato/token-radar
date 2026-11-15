@@ -1,0 +1,127 @@
+/* Token Radar — one dark palette, generous spacing, type that reads. */
+:root {
+  --ink: #0e1420;
+  --panel: #16202f;
+  --panel-2: #1b2a3d;
+  --line: #26374d;
+  --text: #e8eef5;
+  --muted: #9db0c4;
+  --accent: #2dd4bf;
+  --amber: #f5b942;
+  --green: #4ade80;
+  --red: #f87171;
+  --radius: 10px;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--text);
+  font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+.top {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 28px 28px 12px;
+  flex-wrap: wrap;
+}
+.top h1 { margin: 0 0 6px; font-size: 34px; letter-spacing: -0.5px; }
+.top h1::after { content: " ●"; color: var(--accent); }
+.sub { margin: 0; max-width: 720px; color: var(--muted); }
+.meta {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  font-size: 13px;
+  line-height: 1.7;
+  min-width: 220px;
+}
+.meta b { color: var(--amber); font-size: 18px; }
+.controls {
+  display: flex;
+  gap: 14px;
+  align-items: end;
+  flex-wrap: wrap;
+  padding: 12px 28px;
+  background: var(--panel);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.controls label { font-size: 12px; color: var(--muted); display: grid; gap: 4px; }
+.controls input, .controls select {
+  background: var(--ink);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 7px 10px;
+  font: inherit;
+}
+.controls input { min-width: 220px; }
+.count { margin-left: auto; font-size: 13px; color: var(--muted); }
+main { padding: 0 28px 28px; }
+table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+th, td { padding: 9px 10px; text-align: left; border-bottom: 1px solid var(--line); }
+th {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  cursor: pointer;
+  white-space: nowrap;
+}
+th:hover { color: var(--text); }
+tbody tr { cursor: pointer; }
+tbody tr:hover { background: var(--panel); }
+tbody tr.sel { background: var(--panel-2); outline: 1px solid var(--accent); }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+td.value { color: var(--amber); font-weight: 700; white-space: nowrap; }
+td.up { color: var(--green); }
+td.down { color: var(--red); }
+.badge {
+  display: inline-block;
+  background: var(--accent);
+  color: #06281f;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 4px;
+  padding: 1px 6px;
+  margin-left: 6px;
+  vertical-align: 1px;
+}
+.hint { color: var(--muted); font-size: 13px; }
+.detail {
+  background: var(--panel);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  margin: 20px 0;
+}
+.detail h2 { margin: 0 0 4px; font-size: 24px; }
+.detail .facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  margin: 14px 0;
+}
+.detail .facts div { background: var(--ink); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; }
+.detail .facts span { display: block; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.detail .facts b { font-size: 17px; font-variant-numeric: tabular-nums; }
+.detail ol.steps { padding-left: 20px; }
+.detail ol.steps li { margin: 8px 0; }
+.detail .why { color: var(--muted); font-size: 14px; }
+/* A standalone detail view (?view=detail): the board table, the live list and
+   the model note step aside so the detail panel sits at the top of the page. */
+body.solo-detail table, body.solo-detail .hint, body.solo-detail .live, body.solo-detail .model { display: none; }
+.live, .model { margin-top: 28px; }
+.live h2, .model h2 { font-size: 20px; margin-bottom: 6px; }
+.live p, .model p { color: var(--muted); max-width: 780px; }
+.live ol { columns: 2; padding-left: 20px; }
+.live li { margin: 3px 0; font-size: 14px; }
+.live li span { color: var(--muted); }
+footer { padding: 0 28px 24px; color: var(--muted); font-size: 13px; }
+@media (max-width: 900px) {
+  .top, .controls, main { padding-left: 14px; padding-right: 14px; }
+  .live ol { columns: 1; }
+}
