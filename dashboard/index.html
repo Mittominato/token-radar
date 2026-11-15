@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Token Radar — pre-token protocols ranked by implied value</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>Token Radar</h1>
+    <p class="sub">Pre-token protocols, ranked by what a token would be worth if one existed.
+      Values come only from the snapshot's own figures — TVL, 7-day growth, age, chains, category —
+      never from a name list. A protocol is said to record no token, never that it has none.</p>
+  </div>
+  <div class="meta" id="meta"></div>
+</header>
+
+<section class="controls" aria-label="Filter and sort the board">
+  <label>Search <input id="q" type="search" placeholder="protocol name or slug" autocomplete="off"></label>
+  <label>Category
+    <select id="cat"><option value="">All categories</option></select>
+  </label>
+  <label>Show
+    <select id="scope">
+      <option value="all">All ranked</option>
+      <option value="watch">Watchlist only (40)</option>
+      <option value="growing">Growing only (7d &gt; 0%)</option>
+    </select>
+  </label>
+  <label>Min TVL
+    <select id="minTvl">
+      <option value="0">Any</option>
+      <option value="50000000">$50M+</option>
+      <option value="100000000">$100M+</option>
+      <option value="500000000">$500M+</option>
+    </select>
+  </label>
+  <span class="count" id="count"></span>
+</section>
+
+<main>
+  <section aria-label="Ranked board">
+    <table id="board">
+      <thead>
+        <tr>
+          <th data-sort="rank">#</th>
+          <th data-sort="name">Protocol</th>
+          <th data-sort="category">Category</th>
+          <th data-sort="chains">Chains</th>
+          <th data-sort="tvl">TVL</th>
+          <th data-sort="change">7d</th>
+          <th data-sort="age">Age</th>
+          <th data-sort="implied">Implied value</th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <p class="hint">Click a row for its detail view and farm plan. Click a column header to sort.</p>
+  </section>
+
+  <section id="detail" class="detail" aria-label="Protocol detail" hidden></section>
+
+  <section class="live" aria-label="Protocols whose token already trades">
+    <h2>Already launched — not ranked</h2>
+    <p>These protocols record a token that already trades, so they are set aside from the
+      ranking and shown here for comparison, biggest TVL first. A launch radar ranks what
+      has not launched yet.</p>
+    <ol id="live"></ol>
+  </section>
+
+  <section class="model" aria-label="How the value is worked out">
+    <h2>How the value is worked out</h2>
+    <p id="modelText"></p>
+    <p>Every factor is shown on a protocol's detail view, so any row can be checked
+      against the snapshot by hand. The board holds every launch candidate the snapshot
+      contains: all 40 watchlist protocols plus the best-scoring other pre-token
+      protocols that are not wrapped, staked, bridged, versioned or exchange products.</p>
+  </section>
+</main>
+
+<footer>
+  <p>Token Radar · snapshot as of <span id="asOf"></span> · data: DefiLlama protocols, fetched once by make.fun ·
+    built for the token-radar-01 bounty</p>
+</footer>
+
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
